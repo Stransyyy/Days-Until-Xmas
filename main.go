@@ -59,11 +59,16 @@ func main() {
 
 func daysUntilChristmas() {
 
-	yesOrNo("Would you like to know how many days left until Christmas?\n\nAnswer with a (yes/no) please.\n\n")
+	if yesOrNoQuestion("Would you like to know how many days left until Christmas?\n\nAnswer with a (yes/no) please.\n\n") {
 
+		ifYesContinue("\nGreat. Would you like how many days until XMAS in days/minutes/seconds ?")
+
+	} else {
+		fmt.Println("Exiting the program. Goodbye! Santa will not miss you.")
+	}
 }
 
-func yesOrNo(question string) bool {
+func yesOrNoQuestion(question string) bool {
 	fmt.Print(question)
 
 	scanner := bufio.NewScanner(os.Stdin)
