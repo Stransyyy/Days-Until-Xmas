@@ -50,21 +50,26 @@ func main() {
 
 	hoy := time.Now().Unix()
 
+	fecha := time.Unix(hoy, 0).Format("2006-01-02 15:04:05")
+
 	figure.NewColorFigure("Hello -ho -ho -ho", "", "red", true).Print()
 
-	fmt.Println("\n \n Today is ", time.Unix(hoy, 0).Format("2006-01-02 15:04:05"))
+	fmt.Printf("\n \nToday is %v", fecha)
 
-	daysUntilChristmas()
+	fmt.Print("\n\n")
+
+	preguntas()
+
 }
 
-func daysUntilChristmas() {
+func preguntas() {
 
 	if yesOrNoQuestion("Would you like to know how many days left until Christmas?\n\nAnswer with a (yes/no) please.\n\n") {
 
-		ifYesContinue("\nGreat. Would you like how many days until XMAS in days/minutes/seconds ?")
+		ifYesContinue("\nGreat. Would you like how many days until XMAS in days/minutes/seconds?")
 
 	} else {
-		fmt.Println("Exiting the program. Goodbye! Santa will not miss you.")
+		fmt.Print("\nExiting the program. Goodbye! Santa will not miss you.\n\n")
 	}
 }
 
@@ -101,11 +106,16 @@ func ifYesContinue(question string) bool {
 		switch answer {
 		case "days":
 			if answer == "days" {
-
+				daysUntilChristmas()
 			}
 		case "minutes":
-
+			if answer == "minutes" {
+				minutesUntilChristmas()
+			}
 		case "seconds":
+			if answer == "seconds" {
+				secondsUntilChristmas()
+			}
 		}
 	}
 
@@ -115,6 +125,52 @@ func ifYesContinue(question string) bool {
 
 	// Default to no if an error occurs
 	return false
+
+}
+
+func secondsUntilChristmas() {
+
+	hoy := time.Now().Local()
+
+	christmas := time.Date(hoy.Year(), time.December, 25, 0, 0, 0, 0, time.Local)
+
+	untilChristmas := christmas.Sub(hoy)
+
+	// Extract the number of days from the duration
+	daysUntilChristmas := int(untilChristmas.Seconds())
+
+	fmt.Printf("Seconds until Christmas: %d\n", daysUntilChristmas)
+
+}
+
+func minutesUntilChristmas() {
+
+	hoy := time.Now().Local()
+
+	christmas := time.Date(hoy.Year(), time.December, 25, 0, 0, 0, 0, time.Local)
+
+	untilChristmas := christmas.Sub(hoy)
+
+	// Extract the number of days from the duration
+	daysUntilChristmas := int(untilChristmas.Minutes())
+
+	fmt.Printf("Minutes until Christmas: %d\n", daysUntilChristmas)
+
+}
+
+// Days until Christmas
+func daysUntilChristmas() {
+
+	hoy := time.Now().Local()
+
+	christmas := time.Date(hoy.Year(), time.December, 25, 0, 0, 0, 0, time.Local)
+
+	untilChristmas := christmas.Sub(hoy)
+
+	// Extract the number of days from the duration
+	daysUntilChristmas := int(untilChristmas.Hours() / 24)
+
+	fmt.Printf("Days until Christmas: %d\n", daysUntilChristmas)
 
 }
 
