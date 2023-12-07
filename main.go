@@ -64,16 +64,16 @@ func main() {
 
 func preguntas() {
 
-	if yesOrNoQuestion("Would you like to know how many days left until Christmas?\n\nAnswer with a (yes/no) please.\n\n") {
+	if respondsYes("Would you like to know how many days left until Christmas?\n\nAnswer with a (yes/no) please.\n\n") {
 
-		ifYesContinue("\nGreat. Would you like how many days until XMAS in days/minutes/seconds?")
+		selector("\nGreat. Would you like how many days until XMAS in days/minutes/seconds?\n\n")
 
 	} else {
 		fmt.Print("\nExiting the program. Goodbye! Santa will not miss you.\n\n")
 	}
 }
 
-func yesOrNoQuestion(question string) bool {
+func respondsYes(question string) bool {
 	fmt.Print(question)
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -96,7 +96,7 @@ func yesOrNoQuestion(question string) bool {
 	return false
 }
 
-func ifYesContinue(question string) bool {
+func selector(question string) bool {
 
 	fmt.Print(question)
 
@@ -116,6 +116,8 @@ func ifYesContinue(question string) bool {
 			if answer == "seconds" {
 				secondsUntilChristmas()
 			}
+		default:
+
 		}
 	}
 
@@ -163,14 +165,14 @@ func daysUntilChristmas() {
 
 	hoy := time.Now().Local()
 
-	christmas := time.Date(hoy.Year(), time.December, 25, 0, 0, 0, 0, time.Local)
+	christmas := time.Date(hoy.Year(), time.December, 25, 16, 0, 0, 0, time.Local)
 
 	untilChristmas := christmas.Sub(hoy)
 
 	// Extract the number of days from the duration
 	daysUntilChristmas := int(untilChristmas.Hours() / 24)
 
-	fmt.Printf("Days until Christmas: %d\n", daysUntilChristmas)
+	fmt.Printf("\nDays until Christmas: %d\n", daysUntilChristmas)
 
 }
 
